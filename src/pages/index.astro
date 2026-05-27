@@ -1,17 +1,889 @@
 ---
-
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>KH Chess Championship</title>
+
+    <!-- FONT AWESOME -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #050505;
+        color: white;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      /* BACKGROUND GLOW */
+
+      .glow {
+        position: fixed;
+
+        width: 350px;
+        height: 350px;
+
+        border-radius: 50%;
+
+        filter: blur(120px);
+
+        opacity: 0.12;
+
+        z-index: -1;
+
+        animation: floating 8s infinite alternate ease-in-out;
+      }
+
+      .glow1 {
+        background: gold;
+
+        top: 0;
+        left: -100px;
+      }
+
+      .glow2 {
+        background: orange;
+
+        bottom: 0;
+        right: -100px;
+
+        animation-delay: 2s;
+      }
+
+      /* NAVBAR */
+
+      .navbar {
+        position: fixed;
+        top: 0;
+
+        width: 100%;
+
+        padding: 18px 60px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background: rgba(0,0,0,0.55);
+
+        backdrop-filter: blur(12px);
+
+        z-index: 999;
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .logo-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+	  .logo-icon {
+  font-size: 2rem;
+
+  color: #d4af37;
+
+  text-shadow:
+    0 0 15px rgba(212,175,55,0.45);
+}
+      .logo-text {
+        color: #d4af37;
+
+        font-weight: bold;
+
+        letter-spacing: 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 35px;
+      }
+
+      .nav-links a {
+        color: white;
+
+        font-size: 0.95rem;
+
+        transition: 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #d4af37;
+      }
+
+      /* HERO */
+
+      .hero {
+        position: relative;
+
+        height: 100vh;
+
+        background-image:
+          linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.88)),
+          url('/background.jpg');
+
+        background-size: cover;
+        background-position: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        padding: 20px;
+      }
+	  .hero-icon {
+  font-size: 8rem;
+
+  margin-bottom: 25px;
+
+  color: #d4af37;
+
+  text-shadow:
+    0 0 30px rgba(212,175,55,0.45);
+
+  animation: floating 4s ease-in-out infinite;
+}
+
+      .hero-content {
+        max-width: 950px;
+
+        animation: fadeUp 1.5s ease;
+      }
+
+      .title {
+        font-size: 5.5rem;
+
+        font-weight: 900;
+
+        line-height: 1.05;
+
+        letter-spacing: 5px;
+
+        margin-bottom: 25px;
+
+        background:
+          linear-gradient(to right, #ffffff, #d4af37);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        font-size: 1.35rem;
+
+        color: #d2d2d2;
+
+        line-height: 1.9;
+
+        margin-bottom: 45px;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 16px 34px;
+
+        border-radius: 999px;
+
+        font-weight: bold;
+
+        font-size: 1rem;
+
+        transition: 0.35s ease;
+      }
+
+      .primary {
+        background:
+          linear-gradient(135deg, #d4af37, #f4d03f);
+
+        color: black;
+      }
+
+      .secondary {
+        background: rgba(255,255,255,0.05);
+
+        color: white;
+
+        border:
+          1px solid rgba(255,255,255,0.15);
+
+        backdrop-filter: blur(10px);
+      }
+
+      .btn:hover {
+        transform:
+          translateY(-5px)
+          scale(1.03);
+
+        box-shadow:
+          0 0 25px rgba(212,175,55,0.2),
+          0 10px 35px rgba(212,175,55,0.25);
+      }
+
+      /* SECTION */
+
+      section {
+        padding: 110px 25px;
+      }
+
+      .container {
+        max-width: 1250px;
+        margin: auto;
+      }
+
+      .section-title {
+        text-align: center;
+
+        font-size: 3rem;
+
+        margin-bottom: 60px;
+
+        color: #d4af37;
+      }
+
+      /* ABOUT */
+
+      .about-grid {
+        display: grid;
+
+        grid-template-columns:
+          repeat(auto-fit, minmax(250px, 1fr));
+
+        gap: 25px;
+      }
+
+      .about-card {
+        background:
+          linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+          );
+
+        border:
+          1px solid rgba(255,255,255,0.08);
+
+        border-radius: 28px;
+
+        padding: 45px 30px;
+
+        text-align: center;
+
+        transition: 0.35s ease;
+
+        backdrop-filter: blur(10px);
+      }
+
+      .about-card:hover {
+        transform: translateY(-10px);
+
+        box-shadow:
+          0 0 25px rgba(212,175,55,0.12),
+          0 10px 35px rgba(212,175,55,0.2);
+      }
+
+      .about-icon {
+        font-size: 2.5rem;
+
+        color: #d4af37;
+
+        margin-bottom: 25px;
+      }
+
+      .about-card h3 {
+        font-size: 1.5rem;
+
+        margin-bottom: 18px;
+      }
+
+      .about-card p {
+        color: #d4d4d4;
+
+        line-height: 1.9;
+      }
+
+      /* TABLE */
+
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        overflow: hidden;
+
+        border-radius: 22px;
+
+        background:
+          rgba(255,255,255,0.03);
+
+        margin-bottom: 40px;
+      }
+
+      th {
+        background:
+          linear-gradient(135deg, #d4af37, #b8860b);
+
+        color: black;
+
+        padding: 18px;
+      }
+
+      td {
+        padding: 16px;
+
+        border:
+          1px solid rgba(255,255,255,0.08);
+
+        text-align: center;
+
+        color: #e0e0e0;
+      }
+
+      tr:hover {
+        background:
+          rgba(255,255,255,0.04);
+      }
+
+      /* PRIZES */
+
+      .prize-grid {
+        display: grid;
+
+        grid-template-columns:
+          repeat(auto-fit, minmax(420px, 1fr));
+
+        gap: 30px;
+      }
+
+      .prize-card {
+        background:
+          linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+          );
+
+        border-radius: 28px;
+
+        border:
+          1px solid rgba(255,255,255,0.08);
+
+        padding: 30px;
+
+        transition: 0.35s ease;
+      }
+
+      .prize-card:hover {
+        transform: translateY(-8px);
+
+        box-shadow:
+          0 0 25px rgba(212,175,55,0.12),
+          0 10px 35px rgba(212,175,55,0.2);
+      }
+
+      .prize-title {
+        text-align: center;
+
+        color: #d4af37;
+
+        font-size: 1.7rem;
+
+        margin-bottom: 25px;
+      }
+
+      /* RESULTS */
+
+      .results-box {
+        margin-top: 70px;
+
+        background:
+          linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+          );
+
+        border-radius: 30px;
+
+        border:
+          1px solid rgba(255,255,255,0.08);
+
+        padding: 60px 35px;
+
+        text-align: center;
+      }
+
+      .results-icon {
+        font-size: 3rem;
+
+        color: #d4af37;
+
+        margin-bottom: 25px;
+      }
+
+      .results-box h3 {
+        font-size: 2.2rem;
+
+        margin-bottom: 20px;
+
+        color: #d4af37;
+      }
+
+      .results-box p {
+        color: #d0d0d0;
+
+        line-height: 1.9;
+
+        margin-bottom: 35px;
+      }
+
+      /* FOOTER */
+
+      footer {
+        padding: 40px 20px;
+
+        text-align: center;
+
+        color: #888;
+
+        border-top:
+          1px solid rgba(255,255,255,0.08);
+      }
+
+      /* ANIMATION */
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floating {
+        0% {
+          transform: translateY(0px);
+        }
+
+        50% {
+          transform: translateY(-15px);
+        }
+
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 900px) {
+
+        .navbar {
+          padding: 18px 20px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .title {
+          font-size: 3.2rem;
+        }
+
+        .subtitle {
+          font-size: 1.05rem;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .prize-grid {
+          grid-template-columns: 1fr;
+        }
+
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <!-- GLOW -->
+
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+      <div class="logo-wrapper">
+
+<div class="logo-icon">
+  <i class="fa-solid fa-chess-king"></i>
+</div>
+
+        <div class="logo-text">
+          KH CHESS CHAMPIONSHIP
+        </div>
+
+      </div>
+
+      <div class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#flow">FLOW</a>
+        <a href="#prizes">PRIZES</a>
+        <a href="#results">RESULTS</a>
+      </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+ <div class="logo-icon">
+  <i class="fa-solid fa-chess-king"></i>
+</div>
+
+        <h1 class="title">
+          KH CHESS<br />
+          CHAMPIONSHIP
+        </h1>
+
+        <div class="button-group">
+
+          <a
+            class="btn primary"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe_pei4kRKKpWDWcyWBWajBtfvKMD0aJGTz90Sb4XgfWBbNEA/viewform?usp=dialog"
+            target="_blank"
+          >
+            Register Now
+          </a>
+
+          <a
+            class="btn secondary"
+            href="https://docs.google.com/document/d/1j6rJqnWfSFP7mva4H-6OMYipO1QGAL9FcfVosqkd_eE/edit?usp=sharing"
+            target="_blank"
+          >
+            Tournament Rules
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <h2 class="section-title">
+          <i class="fa-solid fa-chess-king"></i>
+          About The Tournament
+        </h2>
+
+        <div class="about-grid">
+
+          <div class="about-card">
+
+            <div class="about-icon">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <h3>Date</h3>
+
+            <p>
+              27th June 2026<br />
+              (Saturday)
+            </p>
+
+          </div>
+
+          <div class="about-card">
+
+            <div class="about-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <h3>Time</h3>
+
+            <p>
+              08:00a.m. - 06:00p.m.
+            </p>
+
+          </div>
+
+          <div class="about-card">
+
+            <div class="about-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <h3>Venue</h3>
+
+            <p>
+              DEWAN DATO TEOH BOON BENG
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FLOW -->
+
+    <section id="flow">
+
+      <div class="container">
+
+        <h2 class="section-title">
+          <i class="fa-solid fa-chess-board"></i>
+          Tentative Flow
+        </h2>
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <tr>
+              <th>Event</th>
+              <th>Time</th>
+            </tr>
+
+            <tr><td>Registration</td><td>08:00a.m.</td></tr>
+            <tr><td>Players Briefing</td><td>08:30a.m. - 09:00a.m.</td></tr>
+            <tr><td>Round 1</td><td>09:00a.m. - 09:50a.m.</td></tr>
+            <tr><td>Round 2</td><td>10:10a.m. - 11:00a.m.</td></tr>
+            <tr><td>Round 3</td><td>11:20a.m. - 12:10p.m.</td></tr>
+            <tr><td>Lunch Break</td><td>12:10p.m. - 02:00p.m.</td></tr>
+            <tr><td>Round 4</td><td>02:00p.m. - 02:50p.m.</td></tr>
+            <tr><td>Round 5</td><td>03:10p.m. - 04:00p.m.</td></tr>
+            <tr><td>Round 6</td><td>04:20p.m. - 05:10p.m.</td></tr>
+            <tr><td>Closing Ceremony</td><td>05:30p.m. - 06:00p.m.</td></tr>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PRIZES -->
+
+    <section id="prizes">
+
+      <div class="container">
+
+        <h2 class="section-title">
+          <i class="fa-solid fa-trophy"></i>
+          Prizes
+        </h2>
+
+        <div class="prize-grid">
+
+          <div class="prize-card">
+
+            <h3 class="prize-title">
+              Open Category
+            </h3>
+
+            <table>
+
+              <tr>
+                <th>Ranking</th>
+                <th>Prize</th>
+              </tr>
+
+              <tr><td>Champion</td><td>Trophy, Certificate, Cash (RM200)</td></tr>
+              <tr><td>1st Runner-Up</td><td>Trophy, Certificate, Cash (RM150)</td></tr>
+              <tr><td>2nd Runner-Up</td><td>Trophy, Certificate, Cash (RM100)</td></tr>
+              <tr><td>4th Place</td><td>Trophy, Certificate, Cash (RM50)</td></tr>
+              <tr><td>5th Place</td><td>Trophy, Certificate, Cash (RM50)</td></tr>
+
+            </table>
+
+          </div>
+
+          <div class="prize-card">
+
+            <h3 class="prize-title">
+              U18 Boys Category
+            </h3>
+
+            <table>
+
+              <tr>
+                <th>Ranking</th>
+                <th>Prize</th>
+              </tr>
+
+              <tr><td>Champion</td><td>Trophy, Certificate</td></tr>
+              <tr><td>1st Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>2nd Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>4th Place</td><td>Trophy, Certificate</td></tr>
+              <tr><td>5th Place</td><td>Trophy, Certificate</td></tr>
+
+            </table>
+
+          </div>
+
+          <div class="prize-card">
+
+            <h3 class="prize-title">
+              U18 Girls Category
+            </h3>
+
+            <table>
+
+              <tr>
+                <th>Ranking</th>
+                <th>Prize</th>
+              </tr>
+
+              <tr><td>Champion</td><td>Trophy, Certificate</td></tr>
+              <tr><td>1st Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>2nd Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>4th Place</td><td>Trophy, Certificate</td></tr>
+              <tr><td>5th Place</td><td>Trophy, Certificate</td></tr>
+
+            </table>
+
+          </div>
+
+          <div class="prize-card">
+
+            <h3 class="prize-title">
+              U15 Boys Category
+            </h3>
+
+            <table>
+
+              <tr>
+                <th>Ranking</th>
+                <th>Prize</th>
+              </tr>
+
+              <tr><td>Champion</td><td>Trophy, Certificate</td></tr>
+              <tr><td>1st Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>2nd Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>4th Place</td><td>Trophy, Certificate</td></tr>
+              <tr><td>5th Place</td><td>Trophy, Certificate</td></tr>
+
+            </table>
+
+          </div>
+
+          <div class="prize-card">
+
+            <h3 class="prize-title">
+              U15 Girls Category
+            </h3>
+
+            <table>
+
+              <tr>
+                <th>Ranking</th>
+                <th>Prize</th>
+              </tr>
+
+              <tr><td>Champion</td><td>Trophy, Certificate</td></tr>
+              <tr><td>1st Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>2nd Runner-Up</td><td>Trophy, Certificate</td></tr>
+              <tr><td>4th Place</td><td>Trophy, Certificate</td></tr>
+              <tr><td>5th Place</td><td>Trophy, Certificate</td></tr>
+
+            </table>
+
+          </div>
+
+        </div>
+
+        <!-- RESULTS -->
+
+        <div
+          class="results-box"
+          id="results"
+        >
+
+          <div class="results-icon">
+            <i class="fa-solid fa-chart-column"></i>
+          </div>
+
+          <h3>
+            Chess Results
+          </h3>
+
+          <p>
+            View pairings, standings,
+            round results, and official
+            tournament statistics.
+          </p>
+
+          <a
+            class="btn primary"
+            href="https://chess-results.com"
+            target="_blank"
+          >
+            View Chess Results
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+      © 2026 KH Chess Championship. All Rights Reserved.
+    </footer>
+
+  </body>
 </html>
