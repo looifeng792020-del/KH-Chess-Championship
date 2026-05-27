@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://kh-chess-championship.abrdns.com',
+  site: 'https://www.kh-chess-championship.abrdns.com',
 });
