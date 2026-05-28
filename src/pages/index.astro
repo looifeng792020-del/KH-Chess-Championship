@@ -451,7 +451,20 @@
 
         margin-bottom: 25px;
       }
+.disabled-btn {
+  opacity: 0.6;
 
+  cursor: not-allowed;
+
+  background: #666;
+
+  border: 1px solid #888;
+}
+
+.disabled-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
       .results-box h3 {
         font-size: 2.2rem;
 
@@ -865,13 +878,19 @@
             tournament statistics.
           </p>
 
-          <a
-            class="btn primary"
-            href="https://chess-results.com"
-            target="_blank"
-          >
-            View Chess Results
-          </a>
+<button class="btn disabled-btn">
+  Chess Results Coming Soon
+</button>
+
+<!-- 
+<a
+  href="你的ChessResults链接"
+  class="btn"
+  target="_blank"
+>
+  Chess Results
+</a>
+-->
 
         </div>
 
