@@ -264,6 +264,7 @@
 
       .about-grid,
       .action-grid,
+      .location-panel,
       .prize-grid {
         display: grid;
         gap: 22px;
@@ -282,8 +283,15 @@
         align-items: start;
       }
 
+      .location-panel {
+        grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+        overflow: hidden;
+        border-radius: 22px;
+      }
+
       .about-card,
       .action-card,
+      .location-panel,
       .prize-card,
       .results-box {
         border: 1px solid var(--line);
@@ -350,6 +358,79 @@
 
       .action-card .btn {
         width: 100%;
+      }
+
+      .venue-actions,
+      .location-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .venue-actions {
+        justify-content: center;
+        margin-top: 18px;
+      }
+
+      .mini-link {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        padding: 9px 13px;
+        background: rgba(255, 255, 255, 0.07);
+        color: var(--text);
+        font-size: 0.84rem;
+        font-weight: 800;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .mini-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(212, 175, 55, 0.14);
+      }
+
+      .map-link {
+        border-color: rgba(212, 175, 55, 0.36);
+      }
+
+      .waze-link {
+        border-color: rgba(51, 204, 255, 0.36);
+      }
+
+      .location-copy {
+        padding: 38px;
+      }
+
+      .location-copy h3 {
+        margin-bottom: 12px;
+        color: var(--gold);
+        font-size: 1.6rem;
+      }
+
+      .location-copy p {
+        margin-bottom: 22px;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .map-preview {
+        min-height: 360px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .map-preview iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 360px;
+        border: 0;
       }
 
       .table-wrapper {
@@ -474,6 +555,7 @@
 
         .about-grid,
         .action-grid,
+        .location-panel,
         .prize-grid {
           grid-template-columns: 1fr;
         }
@@ -523,6 +605,7 @@
 
         .about-card,
         .action-card,
+        .location-panel,
         .prize-card,
         .results-box {
           border-radius: 16px;
@@ -530,6 +613,14 @@
 
         .prize-card {
           padding: 18px;
+        }
+
+        .location-copy {
+          padding: 26px;
+        }
+
+        .location-actions .btn {
+          width: 100%;
         }
 
         table {
@@ -556,6 +647,7 @@
 
         <div class="nav-links" aria-label="Main navigation">
           <a href="#about">ABOUT</a>
+          <a href="#location">LOCATION</a>
           <a href="#registration">REGISTER</a>
           <a href="#resources">RESOURCES</a>
           <a href="#flow">FLOW</a>
@@ -598,7 +690,7 @@
             About The Tournament
           </h2>
           <p class="section-intro">
-            Key tournament details are gathered here so the opening screen can stay focused.
+            Key tournament details are gathered here.
           </p>
 
           <div class="about-grid">
@@ -627,7 +719,77 @@
               </div>
               <h3>Venue</h3>
               <p>Dewan Dato Teoh Boon Beng</p>
+              <div class="venue-actions" aria-label="Venue navigation links">
+                <a
+                  class="mini-link map-link"
+                  href="https://maps.app.goo.gl/C7Jh2wSXNGhWFsme7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  Google Maps
+                </a>
+                <a
+                  class="mini-link waze-link"
+                  href="https://ul.waze.com/ul?venue_id=65798205.657719905.580731&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-brands fa-waze"></i>
+                  Waze
+                </a>
+              </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="location">
+        <div class="container">
+          <h2 class="section-title">
+            <i class="fa-solid fa-map-location-dot"></i>
+            Location
+          </h2>
+          <p class="section-intro">
+            Preview the venue map here, then open your preferred navigation app for directions.
+          </p>
+
+          <div class="location-panel">
+            <div class="location-copy">
+              <h3>Dewan Dato Teoh Boon Beng</h3>
+              <p>
+                Use Google Maps for a full map view or Waze for live driving navigation to the tournament venue.
+              </p>
+              <div class="location-actions">
+                <a
+                  class="btn primary"
+                  href="https://maps.app.goo.gl/C7Jh2wSXNGhWFsme7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  Open Google Maps
+                </a>
+                <a
+                  class="btn secondary"
+                  href="https://ul.waze.com/ul?venue_id=65798205.657719905.580731&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-brands fa-waze"></i>
+                  Open Waze
+                </a>
+              </div>
+            </div>
+
+            <div class="map-preview">
+              <iframe
+                title="Map preview for Dewan Dato Teoh Boon Beng"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Dewan%20Dato%20Teoh%20Boon%20Beng&output=embed"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -701,7 +863,7 @@
             Tournament Resources
           </h2>
           <p class="section-intro">
-            Rules and services sit here separately, so players can find them without crowding the main page header.
+            You can find rules and services here.
           </p>
 
           <div class="action-grid">
@@ -788,7 +950,7 @@
             Prizes
           </h2>
           <p class="section-intro">
-            Prize information is organized by category for easier scanning.
+            Prizes are prepared for every category.
           </p>
 
           <div class="prize-grid">
